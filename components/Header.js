@@ -12,11 +12,14 @@ export default (props) => {
 
     const [navArray, setNavArray] = useState([])
 
+    console.log(navArray)
+
     useEffect(() => {
         const fecthData = async () => {
             const resType = await axios(servicePath.type)
                 .then(
                     res => {
+                        console.log(res)
                         return res.data.data;
                     }
                 )
@@ -56,8 +59,7 @@ export default (props) => {
                             <HomeOutlined />
                             首页
                         </Menu.Item>
-                        {navArray.map((item, index) => {
-                            console.log(item)
+                        {navArray?.map((item, index) => {
                             return (
                                 <Menu.Item key={item._id}>
                                     <IconFont type={item.icon} />
