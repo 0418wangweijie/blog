@@ -25,6 +25,7 @@ const Music = dynamic(import('../components/Music'), {
 
 export default function Home(props) {
   const { data } = props
+
   const [myList, setMyList] = useState(data)
   const renderer = new marked.Renderer()
 

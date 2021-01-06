@@ -17,6 +17,7 @@ import 'highlight.js/styles/monokai-sublime.css'
 import Tocify from '../components/tocify.tsx'
 import servicePath from '../config/apiUrl'
 import Link from 'next/link';
+import BackgroundBody from '../components/BackgroundBody'
 const Music = dynamic(import('../components/Music'), {
     ssr: false
 })
@@ -55,6 +56,7 @@ export default function Detailed(props) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Header />
+            <BackgroundBody />
             <Row className="comm-main" type='flex' justify='center'>
 
                 <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}>

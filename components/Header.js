@@ -8,13 +8,15 @@ import axios from "axios";
 import servicePath from '../config/apiUrl';
 
 export default (props) => {
-    const [navArray, setNavArray] = useState([])
+    const [navArray, setNavArray] = useState()
+    console.log(navArray)
 
     useEffect(() => {
         const fecthData = async () => {
             const resType = await axios(servicePath.type)
                 .then(
                     res => {
+                        setNavArray(res.data.data)
                         return res.data.data;
                     }
                 )

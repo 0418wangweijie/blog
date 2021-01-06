@@ -14,6 +14,7 @@ import moment from 'moment'
 import marked from 'marked'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai-sublime.css'
+import BackgroundBody from '../components/BackgroundBody'
 const Music = dynamic(import('../components/Music'), {
     ssr: false
 })
@@ -52,6 +53,7 @@ export default function ArticleList(props) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Header />
+            <BackgroundBody />
             <Row className="comm-main" type='flex' justify='center'>
                 <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}>
                     <div className="bread-div">
