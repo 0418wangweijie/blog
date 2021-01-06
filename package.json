@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next -p 9000",
     "build": "next build",
-    "start": "next -p 9000"
+    "start": "next -p 9000",
+    "export": "npm run build && next export"
   },
   "dependencies": {
     "@types/lodash": "^4.14.165",
@@ -20,6 +21,7 @@
     "moment": "^2.29.1",
     "next": "10.0.3",
     "react": "17.0.1",
+    "react-aplayer": "^1.0.0",
     "react-dom": "17.0.1",
     "react-markdown": "^5.0.3"
   }

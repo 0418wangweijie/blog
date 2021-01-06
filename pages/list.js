@@ -2,6 +2,7 @@ import { List, Col, Row, Space, Breadcrumb } from 'antd'
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Header from '../components/Header'
+import dynamic from 'next/dynamic'
 import { CalendarOutlined, FireOutlined } from '@ant-design/icons';
 import Author from '../components/Author';
 import Advert from '../components/Advert'
@@ -13,6 +14,9 @@ import moment from 'moment'
 import marked from 'marked'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai-sublime.css'
+const Music = dynamic(import('../components/Music'), {
+    ssr: false
+})
 
 export default function ArticleList(props) {
 
@@ -52,7 +56,7 @@ export default function ArticleList(props) {
                 <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}>
                     <div className="bread-div">
                         <Breadcrumb>
-                            <Breadcrumb.Item href="/">首页</Breadcrumb.Item>
+                            <Breadcrumb.Item><Link href="/">首页</Link></Breadcrumb.Item>
                             <Breadcrumb.Item>列表页</Breadcrumb.Item>
                         </Breadcrumb>
                     </div>
@@ -63,7 +67,7 @@ export default function ArticleList(props) {
                         renderItem={item => (
                             <List.Item>
                                 <div className="list-title">
-                                    <Link href={{ pathname: '/detailed', query: { id: item._id } }}>{item.title}</Link>
+                                    <Link href={{ pathname: '/detailes', query: { id: item._id } }}>{item.title}</Link>
                                 </div>
                                 <div className="list-icon">
                                     <span><CalendarOutlined />{moment(item.createTime).format('YYYY-MM-DD hh:mm')}</span>
@@ -79,6 +83,7 @@ export default function ArticleList(props) {
                     <Advert />
                 </Col>
             </Row>
+            <Music />
             <Footer />
         </div>
     )

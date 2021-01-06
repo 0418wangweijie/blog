@@ -5,7 +5,7 @@ import { CopyrightOutlined } from '@ant-design/icons'
 export default () => {
     return (
         <div className="footer-div">
-            @2020<CopyrightOutlined /> 王伟杰
+            <a href="https://beian.miit.gov.cn"><CopyrightOutlined />备案号2021000232</a>
         </div>
     )
 }
