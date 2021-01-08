@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import '../styles/components/backgroundBody.css'
 
 export default () => {
-    return (<div style={{ position: 'absolute' }}>
+    const [display, setDisplay] = useState('block')
+    useEffect(() => {
+        if (window.outerWidth <= 1024) {
+            setDisplay('none')
+        } else {
+            setDisplay('block')
+        }
+    }, [])
+    return (<div style={{ position: 'absolute', display }}>
         <ul className="ul1">
             <li className="li1"></li>
             <li className="li1"></li>

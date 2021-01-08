@@ -17,7 +17,9 @@ import 'highlight.js/styles/monokai-sublime.css'
 import Tocify from '../components/tocify.tsx'
 import servicePath from '../config/apiUrl'
 import Link from 'next/link';
-import BackgroundBody from '../components/BackgroundBody'
+const BackgroundBody = dynamic(import('../components/BackgroundBody'), {
+    ssf: false
+})
 const Music = dynamic(import('../components/Music'), {
     ssr: false
 })
