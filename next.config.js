@@ -9,8 +9,8 @@ module.exports = {
     exportPathMap: async function (defaultPathMap) {
         return {
             '/': { page: '/' },
-            '/list': { page: '/list' },
-            '/detailes': { page: '/detailes' }
+            '/about': { page: '/' },
+            '/p/detailes': { page: '/' },
         }
     }
 }

@@ -75,7 +75,7 @@ export default function Home(props) {
                 return (
                   <List.Item>
                     <div className="list-title">
-                      <Link href={{ pathname: '/detailes', query: { id: item._id } }}><a onClick={onLonging}>{item?.title}</a></Link>
+                      <Link href={{ pathname: './detailes', query: { id: item._id } }}><a onClick={onLonging}>{item?.title}</a></Link>
                     </div>
                     <div className="list-icon">
                       <span><CalendarOutlined />{moment(item?.createTime).format("YYYY-MM-DD hh:mm")}</span>

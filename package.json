@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "next -p 9000",
     "build": "next build",
-    "start": "next -p 9000",
-    "export": "npm run build && next export"
+    "start": "node server.js",
+    "export": "npm run start && next export"
   },
   "dependencies": {
     "@types/lodash": "^4.14.165",

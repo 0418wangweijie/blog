@@ -24,7 +24,7 @@ const Music = dynamic(import('../components/Music'), {
     ssr: false
 })
 
-export default function Detailed(props) {
+export default function Detailes(props) {
     const { data } = props
     const tocify = new Tocify()
     const renderer = new marked.Renderer()
@@ -105,8 +105,9 @@ export default function Detailed(props) {
     )
 }
 
-Detailed.getInitialProps = async (context) => {
+Detailes.getInitialProps = async (context) => {
     let id = context.query.id
+    console.log(id)
     const promise = new Promise((resolve, reject) => {
         axios(servicePath.details + id)
             .then(
