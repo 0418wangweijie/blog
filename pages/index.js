@@ -1,5 +1,6 @@
 import { List, Col, Row, Spin } from 'antd'
 import React, { useState } from 'react'
+import { InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
@@ -27,11 +28,10 @@ const Music = dynamic(import('../components/Music'), {
 export default function Home(props) {
   const { data } = props
 
-  const [myList, setMyList] = useState(data)
+  const [myList, setMyList] = useState(data?.data)
   const [isLoading, setisLoading] = useState(false)
   const renderer = new marked.Renderer()
 
-  // console.log(document)
   marked.setOptions({
 
     renderer: renderer,
@@ -75,7 +75,7 @@ export default function Home(props) {
                 return (
                   <List.Item>
                     <div className="list-title">
-                      <Link href={{ pathname: './detailes', query: { id: item._id } }}><a onClick={onLonging}>{item?.title}</a></Link>
+                      <Link href={{ pathname: '/detailes', query: { id: item._id } }}><a onClick={onLonging}>{item?.title}</a></Link>
                     </div>
                     <div className="list-icon">
                       <span><CalendarOutlined />{moment(item?.createTime).format("YYYY-MM-DD hh:mm")}</span>
@@ -99,20 +99,29 @@ export default function Home(props) {
   )
 }
 
-Home.getInitialProps = async () => {
-  const promise = new Promise((resolve, reject) => {
-    axios(servicePath.article)
-      .then(
-        res => {
-          resolve(res.data)
-        }
-      )
-      .catch(
-        error => {
-          reject(error)
-        }
-      )
-  })
+export async function getServerSideProps() {
+  // const promise = new Promise((resolve, reject) => {
+  // const res = await axios(servicePath.article)
+  // const res = await fetch('http://127.0.0.1:7001/article')
+  // console.log(res.data)
+  // .then(
+  //   res => {
+  //     resolve(res.data)
+  //   }
+  // )
+  // .catch(
+  //   error => {
+  //     reject(error)
+  //   }
+  // )
+  // })
+  const res = await axios(servicePath.article)
+  const data = res?.data;
 
-  return await promise
+  return {
+    props: {
+      data
+    }
+  }
+  // return '1'
 }

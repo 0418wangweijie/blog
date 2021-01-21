@@ -6,6 +6,10 @@ import Router from 'next/router'
 // import Link from "next/link";
 import axios from "axios";
 import servicePath from '../config/apiUrl';
+import dynamic from 'next/dynamic'
+const Weather = dynamic(import('./Weather'), {
+    ssf: false
+})
 
 export default (props) => {
     const [navArray, setNavArray] = useState()
@@ -47,6 +51,7 @@ export default (props) => {
                 <Col xs={24} sm={24} md={10} lg={15} xl={12}>
                     <span className="header-logo">王沧海</span>
                     <span className='header-txt'>前端小蜜蜂</span>
+                    <span className="header-weather"><Weather /></span>
                 </Col>
                 <Col xs={0} sm={0} md={14} lg={8} xl={6}>
                     <Menu mode='horizontal'

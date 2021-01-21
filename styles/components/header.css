@@ -27,3 +27,9 @@
 .ant-row {
   /* justify-content: space-between; */
 }
+.header-weather {
+  display: inline-block;
+  padding-left: 0.4rem;
+  position: absolute;
+  bottom: 0;
+}

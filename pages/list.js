@@ -24,10 +24,10 @@ const Music = dynamic(import('../components/Music'), {
 export default function ArticleList(props) {
 
     const { data } = props
-    const [myList, setMyList] = useState(data)
+    const [myList, setMyList] = useState(data?.data)
     const [isLoading, setisLoading] = useState(false)
     useEffect(() => {
-        setMyList(props.data)
+        setMyList(props?.data?.data)
     })
 
     const renderer = new marked.Renderer()
@@ -74,7 +74,7 @@ export default function ArticleList(props) {
                             renderItem={item => (
                                 <List.Item>
                                     <div className="list-title">
-                                        <Link href={{ pathname: './detailes', query: { id: item._id } }}><a onClick={onLonging}>{item?.title}</a></Link>
+                                        <Link href={{ pathname: '/detailes', query: { id: item._id } }}><a onClick={onLonging}>{item?.title}</a></Link>
                                     </div>
                                     <div className="list-icon">
                                         <span><CalendarOutlined />{moment(item.createTime).format('YYYY-MM-DD hh:mm')}</span>
@@ -97,20 +97,28 @@ export default function ArticleList(props) {
     )
 }
 
-ArticleList.getInitialProps = async (context) => {
+export async function getServerSideProps(context) {
     let id = context.query.id
-    const promise = new Promise((resolve, reject) => {
-        axios(servicePath.list + id)
-            .then(
-                res => {
-                    resolve(res.data)
-                }
-            )
-            .catch(
-                error => {
-                    reject(error)
-                }
-            )
-    })
-    return await promise
+    // const promise = new Promise((resolve, reject) => {
+    //     axios(servicePath.list + id)
+    //         .then(
+    //             res => {
+    //                 resolve(res.data)
+    //             }
+    //         )
+    //         .catch(
+    //             error => {
+    //                 reject(error)
+    //             }
+    //         )
+    // })
+    // return await promise
+    const res = await axios(servicePath.list + id)
+    const data = res?.data;
+
+    return {
+        props: {
+            data
+        }
+    }
 }

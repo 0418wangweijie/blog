@@ -25,7 +25,8 @@ const Music = dynamic(import('../components/Music'), {
 })
 
 export default function Detailes(props) {
-    const { data } = props
+    const { data } = props?.data
+    console.log(data)
     const tocify = new Tocify()
     const renderer = new marked.Renderer()
 
@@ -48,7 +49,7 @@ export default function Detailes(props) {
         }
 
     });
-    let content = data.content
+    let content = data?.content
     let html = marked(content)
 
     return (
@@ -72,11 +73,11 @@ export default function Detailes(props) {
                     </div>
                     <div>
                         <div className='detailed-title'>
-                            {data.title}
+                            {data?.title}
                         </div>
                         <div className="list-icon center">
-                            <span><CalendarOutlined />{moment(data.createTime).format('YYYY-MM-DD hh:mm')}</span>
-                            <span><FireOutlined />{data.visitCount}</span>
+                            <span><CalendarOutlined />{moment(data?.createTime).format('YYYY-MM-DD hh:mm')}</span>
+                            <span><FireOutlined />{data?.visitCount}</span>
                         </div>
                         <div className='detailed-content'
                             dangerouslySetInnerHTML={{ __html: html }}
@@ -105,22 +106,30 @@ export default function Detailes(props) {
     )
 }
 
-Detailes.getInitialProps = async (context) => {
+export async function getServerSideProps(context) {
     let id = context.query.id
     console.log(id)
-    const promise = new Promise((resolve, reject) => {
-        axios(servicePath.details + id)
-            .then(
-                res => {
-                    resolve(res.data)
-                }
-            )
-            .catch(
-                error => {
-                    reject(error)
-                }
-            )
-    })
+    // const promise = new Promise((resolve, reject) => {
+    //     axios(servicePath.details + id)
+    //         .then(
+    //             res => {
+    //                 resolve(res.data)
+    //             }
+    //         )
+    //         .catch(
+    //             error => {
+    //                 reject(error)
+    //             }
+    //         )
+    // })
 
-    return await promise
+    // return await promise
+    const res = await axios(servicePath.details + id)
+    const data = res?.data;
+
+    return {
+        props: {
+            data
+        }
+    }
 }
