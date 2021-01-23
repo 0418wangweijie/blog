@@ -3,7 +3,11 @@
   padding: 0.4rem;
   overflow: hidden;
   height: 2.8rem;
+  position: fixed;
   border-bottom: 1px solid #cccccc;
+  width: 100%;
+  z-index: 1;
+  top: 0;
 }
 .header-logo {
   color: #1e90ff;
@@ -28,8 +32,8 @@
   /* justify-content: space-between; */
 }
 .header-weather {
-  display: inline-block;
-  padding-left: 0.4rem;
+  margin-left: 142px;
+  top: 0px;
+  /* z-index: 1000; */
   position: absolute;
-  bottom: 0;
 }

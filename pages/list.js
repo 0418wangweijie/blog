@@ -1,12 +1,10 @@
-import { List, Col, Row, Space, Breadcrumb, Spin } from 'antd'
+import { List, Col, Row, Breadcrumb, Spin } from 'antd'
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
-import Header from '../components/Header'
 import dynamic from 'next/dynamic'
 import { CalendarOutlined, FireOutlined } from '@ant-design/icons';
 import Author from '../components/Author';
 import Advert from '../components/Advert'
-import Footer from '../components/Footer'
 import axios from 'axios'
 import servicePath from '../config/apiUrl'
 import Link from 'next/link'
@@ -16,9 +14,6 @@ import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai-sublime.css'
 const BackgroundBody = dynamic(import('../components/BackgroundBody'), {
     ssf: false
-})
-const Music = dynamic(import('../components/Music'), {
-    ssr: false
 })
 
 export default function ArticleList(props) {
@@ -56,10 +51,9 @@ export default function ArticleList(props) {
                 <title>列表页</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header />
-            <BackgroundBody />
+            {/* <BackgroundBody style={{ width: '100%' }} /> */}
             <Spin tip="Loading..." spinning={isLoading}>
-                <Row className="comm-main" type='flex' justify='center'>
+                <Row className="comm-main" type='flex' justify='center' style={{ marginTop: '3.5rem' }}>
                     <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}>
                         <div className="bread-div">
                             <Breadcrumb>
@@ -91,28 +85,12 @@ export default function ArticleList(props) {
                     </Col>
                 </Row>
             </Spin>
-            <Music />
-            <Footer />
         </div>
     )
 }
 
 export async function getServerSideProps(context) {
     let id = context.query.id
-    // const promise = new Promise((resolve, reject) => {
-    //     axios(servicePath.list + id)
-    //         .then(
-    //             res => {
-    //                 resolve(res.data)
-    //             }
-    //         )
-    //         .catch(
-    //             error => {
-    //                 reject(error)
-    //             }
-    //         )
-    // })
-    // return await promise
     const res = await axios(servicePath.list + id)
     const data = res?.data;
 

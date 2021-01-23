@@ -1,14 +1,11 @@
 import { List, Col, Row, Spin } from 'antd'
 import React, { useState } from 'react'
-import { InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
-import Header from '../components/Header'
 import { CalendarOutlined, FireOutlined } from '@ant-design/icons';
 import Author from '../components/Author';
 import Advert from '../components/Advert'
-import Footer from '../components/Footer'
 import axios from 'axios'
 import moment from 'moment'
 import marked from 'marked'
@@ -31,6 +28,7 @@ export default function Home(props) {
   const [myList, setMyList] = useState(data?.data)
   const [isLoading, setisLoading] = useState(false)
   const renderer = new marked.Renderer()
+
 
   marked.setOptions({
 
@@ -58,13 +56,12 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="heard-background">
-        <Header className="header-index" />
         <Image />
       </div>
 
-      <BackgroundBody style={{ display: 'none' }} />
+      {/* <BackgroundBody style={{ display: 'none', width: '100%' }} /> */}
 
-      <Spin tip="Loading..." spinning={isLoading}>
+      <Spin spinning={isLoading}>
         <Row className="comm-main" type='flex' justify='center'>
           <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}>
             <List
@@ -93,28 +90,12 @@ export default function Home(props) {
           </Col>
         </Row>
       </Spin>
-      <Music />
-      <Footer />
+
     </div>
   )
 }
 
 export async function getServerSideProps() {
-  // const promise = new Promise((resolve, reject) => {
-  // const res = await axios(servicePath.article)
-  // const res = await fetch('http://127.0.0.1:7001/article')
-  // console.log(res.data)
-  // .then(
-  //   res => {
-  //     resolve(res.data)
-  //   }
-  // )
-  // .catch(
-  //   error => {
-  //     reject(error)
-  //   }
-  // )
-  // })
   const res = await axios(servicePath.article)
   const data = res?.data;
 

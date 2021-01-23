@@ -1,10 +1,8 @@
 import { Breadcrumb, Col, Row, Affix } from 'antd'
 import Head from 'next/head'
-import Header from '../components/Header'
 import React from 'react'
 import Author from '../components/Author';
 import Advert from '../components/Advert'
-import Footer from '../components/Footer'
 import '../styles/pages/detailed.css'
 import { CalendarOutlined, FireOutlined } from '@ant-design/icons';
 import '../node_modules/markdown-navbar/dist/navbar.css'
@@ -20,13 +18,9 @@ import Link from 'next/link';
 const BackgroundBody = dynamic(import('../components/BackgroundBody'), {
     ssf: false
 })
-const Music = dynamic(import('../components/Music'), {
-    ssr: false
-})
 
 export default function Detailes(props) {
     const { data } = props?.data
-    console.log(data)
     const tocify = new Tocify()
     const renderer = new marked.Renderer()
 
@@ -58,9 +52,8 @@ export default function Detailes(props) {
                 <title>详情页</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header />
-            <BackgroundBody />
-            <Row className="comm-main" type='flex' justify='center'>
+            {/* <BackgroundBody style={{ width: '100%' }} /> */}
+            <Row className="comm-main" type='flex' justify='center' style={{ marginTop: '3.5rem' }}>
 
                 <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}>
 
@@ -89,8 +82,8 @@ export default function Detailes(props) {
 
                     <Author />
                     <Advert />
-                    <Affix offsetTop={5}>
-                        <div className='detailed-nav comm-box'>
+                    <Affix offsetTop={50}>
+                        <div className='detailed-nav comm-box' style={{ marginTop: '0.5rem' }}>
 
                             <div className='nav-title'>文章目录</div>
                             <div className="toc-list">
@@ -100,30 +93,13 @@ export default function Detailes(props) {
                     </Affix>
                 </Col>
             </Row>
-            <Music />
-            <Footer />
         </div >
     )
 }
 
 export async function getServerSideProps(context) {
     let id = context.query.id
-    console.log(id)
-    // const promise = new Promise((resolve, reject) => {
-    //     axios(servicePath.details + id)
-    //         .then(
-    //             res => {
-    //                 resolve(res.data)
-    //             }
-    //         )
-    //         .catch(
-    //             error => {
-    //                 reject(error)
-    //             }
-    //         )
-    // })
 
-    // return await promise
     const res = await axios(servicePath.details + id)
     const data = res?.data;
 

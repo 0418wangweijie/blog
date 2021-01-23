@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next -p 9000",
+    "dev": "next -p 9001",
     "build": "next build",
-    "start": "node server.js",
-    "export": "next build && next export"
+    "start": "set NODE_ENV=production && next start -p 9000",
+    "export": "next export",
+    "prod": "set NODE_ENV=production && node server.js",
+    "static-run": "serve out"
   },
   "dependencies": {
     "@types/lodash": "^4.14.165",
@@ -15,14 +17,17 @@
     "axios": "^0.21.0",
     "babel-plugin-import": "^1.13.3",
     "highlight.js": "^10.4.1",
+    "jquery": "^3.5.1",
     "lodash": "^4.17.20",
     "markdown-navbar": "^1.4.3",
     "marked": "^1.2.6",
     "moment": "^2.29.1",
     "next": "10.0.3",
+    "rc-texty": "^0.2.0",
     "react": "17.0.1",
     "react-aplayer": "^1.0.0",
     "react-dom": "17.0.1",
-    "react-markdown": "^5.0.3"
+    "react-markdown": "^5.0.3",
+    "serve": "^11.3.2"
   }
 }
