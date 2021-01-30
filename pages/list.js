@@ -71,7 +71,7 @@ export default function ArticleList(props) {
                                         <Link href={{ pathname: '/detailes', query: { id: item._id } }}><a onClick={onLonging}>{item?.title}</a></Link>
                                     </div>
                                     <div className="list-icon">
-                                        <span><CalendarOutlined />{moment(item.createTime).format('YYYY-MM-DD hh:mm')}</span>
+                                        <span><CalendarOutlined />{moment(item.createTime).format('YYYY-MM-DD')}</span>
                                         <span><FireOutlined />{item.visitCount}</span>
                                     </div>
                                     <div className="list-context" dangerouslySetInnerHTML={{ __html: marked(item.introduce) }}></div>

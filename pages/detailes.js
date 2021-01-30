@@ -69,7 +69,7 @@ export default function Detailes(props) {
                             {data?.title}
                         </div>
                         <div className="list-icon center">
-                            <span><CalendarOutlined />{moment(data?.createTime).format('YYYY-MM-DD hh:mm')}</span>
+                            <span><CalendarOutlined />{moment(data?.createTime).format('YYYY-MM-DD')}</span>
                             <span><FireOutlined />{data?.visitCount}</span>
                         </div>
                         <div className='detailed-content'

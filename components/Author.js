@@ -8,30 +8,6 @@ import 'rc-texty/assets/index.css'
 
 
 export default (props) => {
-    // const [newIntroduce, setNewIntroduce] = useState()
-    // var introduce = '热爱生活，动漫，游戏忠实爱好者。'
-
-
-    // var index = 1;
-    // const type = () => {
-    //     if (index <= introduce.length) {
-    //         setNewIntroduce(introduce.substring(0, index))
-    //         index++;
-    //     } else {
-    //         setTimeout(type, 250)
-    //     }
-
-    //     if (index > introduce.length) {
-    //         setNewIntroduce(introduce.substring(0, index))
-    //         index--
-    //         // clearTimeout(type)
-    //     } else {
-    //         setTimeout(type, 250)
-    //     }
-    // }
-    // useEffect(() => {
-    //     type();
-    // }, [])
 
     return (
         <div className="author-div comm-box">

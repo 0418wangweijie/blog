@@ -1,4 +1,4 @@
-import { List, Col, Row, Spin } from 'antd'
+import { List, Col, Row, Spin, Card } from 'antd'
 import React, { useState } from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
@@ -12,15 +12,17 @@ import marked from 'marked'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai-sublime.css'
 import servicePath from '../config/apiUrl'
+import Learning from '../components/Learning'
+// import SlideShow from '../components/SlideShow'
 const Image = dynamic(import('../components/Image'), {
   ssf: false
 })
-const BackgroundBody = dynamic(import('../components/BackgroundBody'), {
+const SlideShow = dynamic(import('../components/SlideShow'), {
   ssf: false
 })
-const Music = dynamic(import('../components/Music'), {
-  ssr: false
-})
+// const Music = dynamic(import('../components/Music'), {
+//   ssr: false
+// })
 
 export default function Home(props) {
   const { data } = props
@@ -60,10 +62,18 @@ export default function Home(props) {
       </div>
 
       {/* <BackgroundBody style={{ display: 'none', width: '100%' }} /> */}
+      <Row type="flex" justify="center" style={{ marginTop: '1.5rem' }} gutter={[10, 10]}>
+        <Col xs={23} sm={23} md={16} lg={12} xl={12}>
+          <SlideShow />
+        </Col>
+        <Col flex={2} xs={23} sm={23} md={6} lg={6} xl={5.1}>
+          <Learning />
+        </Col>
+      </Row>
 
       <Spin spinning={isLoading}>
         <Row className="comm-main" type='flex' justify='center'>
-          <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}>
+          <Col className="comm-left" xs={23} sm={23} md={16} lg={18} xl={14}>
             <List
               header='最新日志'
               dataSource={myList}
@@ -75,7 +85,7 @@ export default function Home(props) {
                       <Link href={{ pathname: '/detailes', query: { id: item._id } }}><a onClick={onLonging}>{item?.title}</a></Link>
                     </div>
                     <div className="list-icon">
-                      <span><CalendarOutlined />{moment(item?.createTime).format("YYYY-MM-DD hh:mm")}</span>
+                      <span><CalendarOutlined />{moment(item?.createTime).format("YYYY-MM-DD")}</span>
                       <span><FireOutlined />{item?.visitCount}</span>
                     </div>
                     <div className="list-context" dangerouslySetInnerHTML={{ __html: marked(item?.introduce) }}></div>
@@ -91,7 +101,7 @@ export default function Home(props) {
         </Row>
       </Spin>
 
-    </div>
+    </div >
   )
 }
 

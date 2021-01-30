@@ -23,6 +23,7 @@
     "marked": "^1.2.6",
     "moment": "^2.29.1",
     "next": "10.0.3",
+    "rc-banner-anim": "^2.4.5",
     "rc-texty": "^0.2.0",
     "react": "17.0.1",
     "react-aplayer": "^1.0.0",
