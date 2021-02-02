@@ -1,7 +1,8 @@
 import BannerAnim, { Element } from 'rc-banner-anim';
-import React, { useEffect, useState } from 'react'
-// import TweenOne from 'rc-tween-one';
+import React from 'react'
+import TweenOne from 'rc-tween-one';
 import 'rc-banner-anim/assets/index.css';
+import '../styles/components/slideshow.css'
 const BgElement = Element.BgElement;
 
 export default () => {
@@ -16,26 +17,13 @@ export default () => {
           key="bg"
           className="bg"
           style={{
-            background: "url('https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png') no-repeat",
+            background: "url('/slide.jpg') no-repeat",
             backgroundSize: 'cover',
             overflow: 'hidden',
             width: '100%',
             height: '100%'
           }}
         />
-        {/* <img
-          alt="example"
-          className="learning-img"
-          src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-        /> */}
-        {/* <TweenOne className="banner-user-title" animation={{ y: 30, opacity: 0, type: 'from' }}>
-            Ant Motion Banner
-          </TweenOne>
-          <TweenOne className="banner-user-text" 
-            animation={{ y: 30, opacity: 0, type: 'from', delay: 100 }}
-          >
-            The Fast Way Use Animation In React
-          </TweenOne> */}
       </Element>
       <Element
         prefixCls="banner-user-elem"
@@ -47,17 +35,17 @@ export default () => {
           style={{
             background: '#64CBCC',
             width: '100%',
-            height: '100%'
+            height: '100%',
           }}
         />
-        {/* <TweenOne className="banner-user-title" animation={{ y: 30, opacity: 0, type: 'from' }}>
-            Ant Motion Banner
+        <TweenOne className="banner-user-title" animation={{ y: 30, opacity: 0, type: 'from' }}>
+          仅供观赏无内容
           </TweenOne>
-          <TweenOne className="banner-user-text" 
-            animation={{ y: 30, opacity: 0, type: 'from', delay: 100 }}
-          >
-            The Fast Way Use Animation In React
-          </TweenOne> */}
+        <TweenOne className="banner-user-text"
+          animation={{ y: 30, opacity: 0, type: 'from', delay: 100 }}
+        >
+          For viewing only without content
+          </TweenOne>
       </Element>
     </BannerAnim>);
 }

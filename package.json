@@ -25,6 +25,7 @@
     "next": "10.0.3",
     "rc-banner-anim": "^2.4.5",
     "rc-texty": "^0.2.0",
+    "rc-tween-one": "^2.7.3",
     "react": "17.0.1",
     "react-aplayer": "^1.0.0",
     "react-dom": "17.0.1",

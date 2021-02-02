@@ -55,7 +55,7 @@ export default function Home(props) {
     <div>
       <Head>
         <title>首页</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="http://wangcanghai.cn/favicon.ico" />
       </Head>
       <div className="heard-background">
         <Image />

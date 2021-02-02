@@ -57,7 +57,7 @@ export default (props) => {
     }
 
     const IconFont = createFromIconfontCN({
-        scriptUrl: '//at.alicdn.com/t/font_2273731_7do9v58oe9p.js'
+        scriptUrl: 'http://at.alicdn.com/t/font_2273731_8niql81e7d3.js'
     })
     const showDrawer = () => {
         setVisible(true);

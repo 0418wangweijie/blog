@@ -95,10 +95,9 @@ export default function Detailes(props) {
     )
 }
 
-export async function getServerSideProps(context) {
-    let id = context.query.id
+export async function getServerSideProps() {
 
-    const res = await axios(servicePath.details + id)
+    const res = await axios(servicePath.details)
     const data = res?.data;
 
     return {
