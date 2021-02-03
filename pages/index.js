@@ -56,6 +56,9 @@ export default function Home(props) {
       <Head>
         <title>首页</title>
         <link rel="icon" href="http://wangcanghai.cn/favicon.ico" />
+        <meta name="description" content="王沧海的个人博客记录生活，学习，技术" />
+        <meta name="keywords" content="王伟杰，王沧海，个人博客，js，Html，Css，React，Next.js，AntD，Node.js" />
+        <meta name="author" content="王伟杰，王沧海" />
       </Head>
       <div className="heard-background">
         <Image />
