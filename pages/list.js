@@ -66,16 +66,18 @@ export default function ArticleList(props) {
                             dataSource={myList}
                             itemLayout="vertical"
                             renderItem={item => (
-                                <List.Item>
-                                    <div className="list-title">
-                                        <Link href={{ pathname: '/detailes', query: { id: item._id } }}><a onClick={onLonging}>{item?.title}</a></Link>
-                                    </div>
-                                    <div className="list-icon">
-                                        <span><CalendarOutlined />{moment(item.createTime).format('YYYY-MM-DD')}</span>
-                                        <span><FireOutlined />{item.visitCount}</span>
-                                    </div>
-                                    <div className="list-context" dangerouslySetInnerHTML={{ __html: marked(item.introduce) }}></div>
-                                </List.Item>
+                                <Card hoverable>
+                                    <List.Item>
+                                        <div className="list-title">
+                                            <Link href={{ pathname: '/detailes', query: { id: item._id } }}><a onClick={onLonging}>{item?.title}</a></Link>
+                                        </div>
+                                        <div className="list-icon">
+                                            <span><CalendarOutlined />{moment(item.createTime).format('YYYY-MM-DD')}</span>
+                                            <span><FireOutlined />{item.visitCount}</span>
+                                        </div>
+                                        <div className="list-context" dangerouslySetInnerHTML={{ __html: marked(item.introduce) }}></div>
+                                    </List.Item>
+                                </Card>
                             )}
                         />
                     </Col>

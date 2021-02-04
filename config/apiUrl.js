@@ -5,6 +5,7 @@ let servicePath = {
     details: ipUrl + '/article/details/', //详细页接口
     type: ipUrl + '/type',  //分类接口
     list: ipUrl + '/list/',//文章列表接口
+    getMusic: ipUrl + '/getMusic'
 }
 
 export default servicePath;

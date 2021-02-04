@@ -65,7 +65,7 @@ export default function Home(props) {
       </div>
 
       {/* <BackgroundBody style={{ display: 'none', width: '100%' }} /> */}
-      <Row type="flex" justify="center" style={{ marginTop: '1.5rem' }} gutter={[10, 10]}>
+      <Row type="flex" justify="center" style={{ marginLeft: 0, marginRight: 0, marginTop: '1.5rem' }} gutter={[10, 10]}>
         <Col xs={23} sm={23} md={16} lg={12} xl={12}>
           <SlideShow />
         </Col>
@@ -83,16 +83,18 @@ export default function Home(props) {
               itemLayout="vertical"
               renderItem={item => {
                 return (
-                  <List.Item>
-                    <div className="list-title">
-                      <Link href={{ pathname: '/detailes', query: { id: item._id } }}><a onClick={onLonging}>{item?.title}</a></Link>
-                    </div>
-                    <div className="list-icon">
-                      <span><CalendarOutlined />{moment(item?.createTime).format("YYYY-MM-DD")}</span>
-                      <span><FireOutlined />{item?.visitCount}</span>
-                    </div>
-                    <div className="list-context" dangerouslySetInnerHTML={{ __html: marked(item?.introduce) }}></div>
-                  </List.Item>
+                  <Card hoverable>
+                    <List.Item>
+                      <div className="list-title">
+                        <Link href={{ pathname: '/detailes', query: { id: item._id } }}><a onClick={onLonging}>{item?.title}</a></Link>
+                      </div>
+                      <div className="list-icon">
+                        <span><CalendarOutlined />{moment(item?.createTime).format("YYYY-MM-DD")}</span>
+                        <span><FireOutlined />{item?.visitCount}</span>
+                      </div>
+                      <div className="list-context" dangerouslySetInnerHTML={{ __html: marked(item?.introduce) }}></div>
+                    </List.Item>
+                  </Card>
                 )
               }}
             />
