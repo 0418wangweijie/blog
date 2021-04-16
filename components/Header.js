@@ -14,11 +14,12 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import Author from "./Author";
 import Advert from "./Advert";
+const Weather = dynamic(import("./Weather"), {
+  ssf: false,
+});
 
 export default (props) => {
-  console.log(props);
-  const { data } = props;
-  const [navArray, setNavArray] = useState(data?.data);
+  const [navArray, setNavArray] = useState();
   const [display, setDisplay] = useState("binline-block");
   const [visible, setVisible] = useState(false);
 
@@ -32,22 +33,19 @@ export default (props) => {
   }, []);
 
   useEffect(() => {
-    setNavArray(props?.data?.data);
-  });
-  //   useEffect(() => {
-  //     const fecthData = async () => {
-  //       const resType = await axios(servicePath.type)
-  //         .then((res) => {
-  //           setNavArray(res.data.data);
-  //           return res.data.data;
-  //         })
-  //         .catch((error) => {
-  //           return error;
-  //         });
-  //       setNavArray(resType);
-  //     };
-  //     fecthData();
-  //   }, []);
+    const fecthData = async () => {
+      const resType = await axios(servicePath.type)
+        .then((res) => {
+          setNavArray(res.data.data);
+          return res.data.data;
+        })
+        .catch((error) => {
+          return error;
+        });
+      setNavArray(resType);
+    };
+    fecthData();
+  }, []);
 
   const handleClick = (e) => {
     if (e.key == 0) {
@@ -115,14 +113,3 @@ export default (props) => {
     </div>
   );
 };
-export async function getServerSideProps() {
-  const res = await axios(servicePath.type);
-  const data = res?.data;
-
-  return {
-    props: {
-      data,
-    },
-  };
-  // return '1'
-}
