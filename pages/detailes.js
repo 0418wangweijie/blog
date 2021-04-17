@@ -42,7 +42,6 @@ export default function Detailes(props) {
 
 
     let content = data?.content
-    console.log(content)
     let html = marked(content)
 
     return (

@@ -51,7 +51,12 @@ export default (props) => {
     if (e.key == 0) {
       Router.push("/");
     } else {
-      Router.push("/list?id=" + e.key);
+      Router.push({
+        pathname: "/list",
+        query: {
+          id: e.key,
+        },
+      });
     }
   };
 
