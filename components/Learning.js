@@ -46,7 +46,7 @@ export default (props) => {
               });
             }}
           >
-            <img alt="example" className="learning-img" src="/learning.jpg" />
+            <img alt="example" className="learning-img" src="/slide.jpg" />
             <div className="learning-shade" />
           </div>
         </Col>

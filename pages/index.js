@@ -14,22 +14,25 @@ import hljs from "highlight.js";
 import "highlight.js/styles/monokai-sublime.css";
 import servicePath from "../config/apiUrl";
 import Learning from "../components/Learning";
-import { ConfigContext } from "antd/lib/config-provider";
+import { scrollTo } from "../utils/scroll-to";
 // import SlideShow from '../components/SlideShow'
-const Image = dynamic(import("../components/Image"), {
-  ssf: false,
-});
+// const Image = dynamic(import("../components/Image"), {
+//   ssf: false,
+// });
 const SlideShow = dynamic(import("../components/SlideShow"), {
   ssf: false,
 });
+import { selectRouterQuery } from "../store/routerQuery";
+import { useSelector } from "react-redux";
 export default function Home(props) {
   const { data } = props;
 
   const [myList, setMyList] = useState(data?.data);
   const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
   const [isLoading, setisLoading] = useState(false);
   const renderer = new marked.Renderer();
-
+  const title = useSelector(selectRouterQuery);
   useEffect(() => {
     setMyList(data?.data);
     setPage(Number(window.location.search.split("=")[1]));
@@ -52,9 +55,18 @@ export default function Home(props) {
     setisLoading(true);
   };
 
-  const onChange = (e) => {
-    setPage(e);
-    router.push({ path: "/", query: { page: e } });
+  const onChange = (page, pageSize) => {
+    if (page) {
+      setPage(page);
+    }
+    if (pageSize) {
+      setPageSize(pageSize);
+    }
+    scrollTo(0, 2000);
+    router.push({
+      path: "/",
+      query: { page: page, limit: pageSize, title: title },
+    });
   };
   return (
     <div>
@@ -80,7 +92,7 @@ export default function Home(props) {
         style={{ marginLeft: 0, marginRight: 0, marginTop: "3.5rem" }}
         gutter={[10, 10]}
       >
-        <Col xs={23} sm={23} md={16} lg={12} xl={12}>
+        <Col xs={23} sm={23} md={17} lg={12} xl={12}>
           <SlideShow />
         </Col>
         <Col flex={2} xs={23} sm={23} md={6} lg={6} xl={5.1}>
@@ -95,12 +107,18 @@ export default function Home(props) {
               header="最新日志"
               dataSource={myList}
               itemLayout="vertical"
-              pagination={{
-                onChange,
-                total: data?.total,
-                current: page,
-                defaultCurrent: 1,
-              }}
+              pagination={
+                data?.total > 0
+                  ? {
+                      onChange,
+                      total: data?.total,
+                      current: page,
+                      defaultCurrent: page,
+                      pageSize: pageSize,
+                      defaultPageSize: pageSize,
+                    }
+                  : false
+              }
               renderItem={(item) => {
                 return (
                   <Card hoverable>
@@ -151,9 +169,14 @@ export async function getServerSideProps(context) {
   const options = {
     page: 1,
     limit: 10,
+    title: context?.query?.title,
   };
+
   if (context.query.page) {
     options.page = Number(context.query.page);
+  }
+  if (context.query.limit) {
+    options.limit = Number(context.query.limit);
   }
   const res = await axios({ url: servicePath.article, data: options });
   const data = res?.data;
@@ -163,5 +186,4 @@ export async function getServerSideProps(context) {
       data,
     },
   };
-  // return '1'
 }

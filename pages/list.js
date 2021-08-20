@@ -1,7 +1,6 @@
 import { List, Col, Row, Breadcrumb, Spin, Card } from "antd";
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import dynamic from "next/dynamic";
 import router from "next/router";
 import { CalendarOutlined, FireOutlined } from "@ant-design/icons";
 import Author from "../components/Author";
@@ -13,15 +12,13 @@ import moment from "moment";
 import marked from "marked";
 import hljs from "highlight.js";
 import "highlight.js/styles/monokai-sublime.css";
-const BackgroundBody = dynamic(import("../components/BackgroundBody"), {
-  ssf: false,
-});
+import { scrollTo } from "../utils/scroll-to";
 
 export default function ArticleList(props) {
   const { data } = props;
-  console.log(props);
   const [myList, setMyList] = useState(data?.data);
   const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
   const [isLoading, setisLoading] = useState(false);
   useEffect(() => {
     setMyList(data?.data);
@@ -46,10 +43,18 @@ export default function ArticleList(props) {
   const onLonging = () => {
     setisLoading(true);
   };
-  const onChange = (e) => {
-    console.log(e);
-    setPage(e);
-    router.push({ pathname: "/list", query: { id: props?.id, page: e } });
+  const onChange = (page, pageSize) => {
+    if (page) {
+      setPage(page);
+    }
+    if (pageSize) {
+      setPageSize(pageSize);
+    }
+    scrollTo(0, 2000);
+    router.push({
+      pathname: "/list",
+      query: { id: props?.id, page: page, limit: pageSize },
+    });
   };
   return (
     <div>
@@ -82,6 +87,9 @@ export default function ArticleList(props) {
                 onChange,
                 total: data?.totle,
                 current: page,
+                defaultCurrent: page,
+                pageSize: pageSize,
+                defaultPageSize: pageSize,
               }}
               renderItem={(item) => (
                 <Card hoverable>
@@ -136,6 +144,9 @@ export async function getServerSideProps(context) {
   };
   if (context.query.page) {
     options.page = Number(context.query.page);
+  }
+  if (context.query.limit) {
+    options.limit = Number(context.query.limit);
   }
   const res = await axios({ url: servicePath.list, data: options });
   const data = res?.data;
