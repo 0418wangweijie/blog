@@ -70,39 +70,35 @@ export default (props) => {
       {/* <span style={{ display }} className="header-weather"><Weather /></span> */}
       <div className="header">
         <Row type="flex" justify="cneter">
-          <Col xs={20} sm={20} md={10} lg={15} xl={12}>
+          <Col xs={16} sm={16} md={10} lg={11} xl={8}>
             <span className="header-logo">
               <Link href="/">{`王沧海`}</Link>
             </span>
             <span className="header-txt">前端小蜜蜂</span>
           </Col>
-          <Col xs={0} sm={0} md={14} lg={9} xl={12}>
-            <div>
-              <div style={{ display: "inline-block", marginRight: 5 }}>
-                <Popover
-                  placement="bottom"
-                  content={searchInput}
-                  trigger="click"
-                >
-                  <Button shape="circle" icon={<SearchOutlined />}></Button>
-                </Popover>
-              </div>
-              <div style={{ display: "inline-block" }}>
-                <Menu mode="horizontal" onClick={handleClick}>
-                  <Menu.Item key="0">
-                    <HomeOutlined />
-                    首页
-                  </Menu.Item>
-                  {navArray?.map((item, index) => {
-                    return (
-                      <Menu.Item key={item._id}>
-                        <IconFont type={item.icon} />
-                        {item.typeName}
-                      </Menu.Item>
-                    );
-                  })}
-                </Menu>
-              </div>
+          <Col xs={4} sm={4} md={4} lg={4} xl={4}>
+            <div style={{ marginTop: 5 }}>
+              <Popover placement="bottom" content={searchInput} trigger="click">
+                <Button shape="circle" icon={<SearchOutlined />}></Button>
+              </Popover>
+            </div>
+          </Col>
+          <Col xs={0} sm={0} md={10} lg={9} xl={12}>
+            <div style={{ display: "inline-block" }}>
+              <Menu mode="horizontal" onClick={handleClick}>
+                <Menu.Item key="0">
+                  <HomeOutlined />
+                  首页
+                </Menu.Item>
+                {navArray?.map((item, index) => {
+                  return (
+                    <Menu.Item key={item._id}>
+                      <IconFont type={item.icon} />
+                      {item.typeName}
+                    </Menu.Item>
+                  );
+                })}
+              </Menu>
             </div>
           </Col>
           <Col xs={4} sm={4} md={0} lg={0} xl={0} className="header-menu">
