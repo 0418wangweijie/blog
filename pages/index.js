@@ -15,10 +15,6 @@ import "highlight.js/styles/monokai-sublime.css";
 import servicePath from "../config/apiUrl";
 import Learning from "../components/Learning";
 import { scrollTo } from "../utils/scroll-to";
-// import SlideShow from '../components/SlideShow'
-// const Image = dynamic(import("../components/Image"), {
-//   ssf: false,
-// });
 const SlideShow = dynamic(import("../components/SlideShow"), {
   ssf: false,
 });
@@ -56,17 +52,29 @@ export default function Home(props) {
   };
 
   const onChange = (page, pageSize) => {
-    if (page) {
+    if (page == 0) {
+      page = 1
+      setPage(1);
+    }
+    if (page > 0) {
       setPage(page);
     }
     if (pageSize) {
       setPageSize(pageSize);
     }
     scrollTo(0, 2000);
-    router.push({
-      path: "/",
-      query: { page: page, limit: pageSize, title: title },
-    });
+    if (title) {
+      router.push({
+        path: "/",
+        query: { page: page, limit: pageSize, title: title },
+      });
+    } else if (!title) {
+      router.push({
+        path: "/",
+        query: { page: page, limit: pageSize },
+      });
+    }
+
   };
   return (
     <div>
@@ -110,19 +118,27 @@ export default function Home(props) {
               pagination={
                 data?.total > 0
                   ? {
-                      onChange,
-                      total: data?.total,
-                      current: page,
-                      defaultCurrent: page,
-                      pageSize: pageSize,
-                      defaultPageSize: pageSize,
-                    }
+                    onChange,
+                    total: data?.total,
+                    current: page,
+                    defaultCurrent: page,
+                    pageSize: pageSize,
+                    defaultPageSize: pageSize,
+                  }
                   : false
               }
               renderItem={(item) => {
                 return (
                   <Card hoverable>
-                    <List.Item>
+                    <List.Item
+                      extra={
+                        <img
+                          width={272}
+                          alt="logo"
+                          src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                        />
+                      }
+                    >
                       <div className="list-title">
                         <Link
                           href={{
@@ -172,8 +188,11 @@ export async function getServerSideProps(context) {
     title: context?.query?.title,
   };
 
-  if (context.query.page) {
+  if (context.query.page > 0) {
     options.page = Number(context.query.page);
+  }
+  if (context.query.page <= 0) {
+    options.page = Number(1);
   }
   if (context.query.limit) {
     options.limit = Number(context.query.limit);

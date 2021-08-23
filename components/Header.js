@@ -49,9 +49,15 @@ export default (props) => {
     }
   };
   const onSearch = (e) => {
-    Router.push({ pathname: "/", query: { title: e?.target?.value } });
+    if(e?.target?.value){
+      Router.push({ pathname: "/", query: { title: e?.target?.value } });
     // 将值存放到状态管理中
     dispatch(increment(e?.target?.value));
+    }else if(!e?.target?.value){
+      Router.push({ pathname: "/" });
+    // 将值存放到状态管理中
+    dispatch(increment(e?.target?.value));
+    }
   };
 
   const IconFont = createFromIconfontCN({
@@ -84,7 +90,7 @@ export default (props) => {
             </div>
           </Col>
           <Col xs={0} sm={0} md={10} lg={9} xl={12}>
-            <div style={{ display: "inline-block" }}>
+            <div>
               <Menu mode="horizontal" onClick={handleClick}>
                 <Menu.Item key="0">
                   <HomeOutlined />
